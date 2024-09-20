@@ -7,8 +7,8 @@
 
 # Check if running as root
 if [ "$EUID" -ne 0 ]; then
-  echo "This script must be run with sudo."
-  exit 1
+  echo "Requesting sudo password..."
+  exec sudo "$0" "$@"
 fi
 
 # Check if dialog is installed
@@ -26,7 +26,7 @@ if ! command -v jq &> /dev/null; then
 fi
 
 # URL of the cheat codes JSON
-CHEATCODES_URL="https://raw.githubusercontent.com/serainox420/serainox420/refs/heads/personal/STUFF/ccdata.json"  # Replace with the actual URL
+CHEATCODES_URL="https://raw.githubusercontent.com/Szmelc-INC/Cheats/refs/heads/main/data.json"  # Replace with the actual URL
 
 # Fetch the cheat codes JSON
 json_data=$(curl -s "$CHEATCODES_URL")
@@ -77,4 +77,3 @@ done
 
 # Clean up
 clear
-
