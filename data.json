@@ -10,7 +10,7 @@
     },
     {
       "code": "help",
-      "command": "xdg-open https://github.com/Szmelc-INC/Cheats"
+      "command": "bash -c 'xdg-open https://github.com/Szmelc-INC/Cheats'"
     }
   ]
 }
