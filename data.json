@@ -7,6 +7,10 @@
     {
       "code": "DUPA",
       "command": "figlet dupa && mpv https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "code": "help",
+      "command": "xdg-open https://github.com/Szmelc-INC/Cheats"
     }
   ]
 }
