@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# This is "cheat codes console" 
+# A handy script manager in a form of an easter-egg
+# Enter "cheats" to get addons, run fixes, find easter-eggs and more!
+# Full list of commands + payloads can be found at CHEATCODES_URL page below
+
+# Check if running as root
+if [ "$EUID" -ne 0 ]; then
+  echo "This script must be run with sudo."
+  exit 1
+fi
+
+# Check if dialog is installed
+if ! command -v dialog &> /dev/null; then
+  echo "dialog is not installed. Installing..."
+  apt-get update
+  apt-get install -y dialog
+fi
+
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+  echo "jq is not installed. Installing..."
+  apt-get update
+  apt-get install -y jq
+fi
+
+# URL of the cheat codes JSON
+CHEATCODES_URL="https://raw.githubusercontent.com/serainox420/serainox420/refs/heads/personal/STUFF/ccdata.json"  # Replace with the actual URL
+
+# Fetch the cheat codes JSON
+json_data=$(curl -s "$CHEATCODES_URL")
+if [ -z "$json_data" ]; then
+  echo "Failed to fetch cheat codes data."
+  exit 1
+fi
+
+while true; do
+
+  # Prompt the user to enter a cheat code
+  cheatcode=$(dialog --title "Cheat Console v1" --inputbox "Enter cheats (or 'exit' to quit):" 8 50 3>&1 1>&2 2>&3 3>&-)
+
+  # Check if user cancelled or pressed ESC
+  exit_status=$?
+  if [ $exit_status -ne 0 ]; then
+    break
+  fi
+
+  # Check if user wants to exit
+  if [ "$cheatcode" == "exit" ] || [ "$cheatcode" == "quit" ]; then
+    break
+  fi
+
+  # Find the command corresponding to the cheat code
+  command=$(echo "$json_data" | jq -r --arg code "$cheatcode" '.cheatcodes[] | select(.code==$code) | .command')
+
+  if [ -z "$command" ] || [ "$command" == "null" ]; then
+    dialog --title "Cheat Console" --msgbox "Code not found." 6 40
+    continue
+  fi
+
+  # Show confirmation dialog
+  dialog --title "Confirmation" --yesno "Execute?: \n\n$command" 10 60
+
+  response=$?
+  case $response in
+     0) # Yes
+        # Execute the command
+        eval "$command"
+        ;;
+     1|255) # No or ESC
+        dialog --title "Cheat Console" --msgbox "Command execution cancelled." 6 40
+        ;;
+  esac
+
+done
+
+# Clean up
+clear
+
