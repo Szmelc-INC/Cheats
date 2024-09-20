@@ -1,28 +1,26 @@
 #!/bin/bash
 
 # This is "cheat codes console" 
-# A handy script manager in a form of an easter-egg
+# A handy script manager in the form of an easter-egg
 # Enter "cheats" to get addons, run fixes, find easter-eggs and more!
 # Full list of commands + payloads can be found at CHEATCODES_URL page below
 
-# Check if running as root
-if [ "$EUID" -ne 0 ]; then
-  echo "Requesting sudo password..."
-  exec sudo "$0" "$@"
-fi
+# Request sudo password upfront
+echo "Requesting sudo password..."
+sudo -v
 
 # Check if dialog is installed
 if ! command -v dialog &> /dev/null; then
   echo "dialog is not installed. Installing..."
-  apt-get update
-  apt-get install -y dialog
+  sudo apt-get update
+  sudo apt-get install -y dialog
 fi
 
 # Check if jq is installed
 if ! command -v jq &> /dev/null; then
   echo "jq is not installed. Installing..."
-  apt-get update
-  apt-get install -y jq
+  sudo apt-get update
+  sudo apt-get install -y jq
 fi
 
 # URL of the cheat codes JSON
