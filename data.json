@@ -11,6 +11,9 @@
     {
       "code": "help",
       "command": "bash -c 'xdg-open https://github.com/Szmelc-INC/Cheats'"
-    }
+    },
+    {
+      "code": "HACKPACK",
+      "command": "bash -c 'nohup mpv --no-video https://www.youtube.com/watch?v=pFS4zYWxzNA > /dev/null 2>&1 &' && sudo apt install -y metasploit-framework nikto nmap aircrack-ng hydra john sqlmap gobuster wireshark dnsutils tcpdump openvpn dirb sslscan lynis && echo 'Type pkill mpv to stop the music'"
   ]
 }
