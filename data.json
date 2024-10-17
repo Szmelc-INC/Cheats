@@ -19,6 +19,10 @@
     {
       "code": "FIX1",
       "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/1.sh -o /tmp/fix_script.sh && chmod +x /tmp/fix_script.sh && /tmp/fix_script.sh && rm /tmp/fix_script.sh"
+    },
+    {
+      "code": "FIX2",
+      "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/2.sh -o /tmp/fix_script.sh && chmod +x /tmp/fix_script.sh && /tmp/fix_script.sh && rm /tmp/fix_script.sh"
     }
   ]
 }
