@@ -2,7 +2,8 @@
   "cheatcodes": [
     {
       "code": "TEST",
-      "command": "clear && echo 'This is test'"
+      "command": "clear && echo 'This is test'",
+      "desc": "A test command"
     },
     {
       "code": "DUPA",
