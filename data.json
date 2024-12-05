@@ -7,27 +7,33 @@
     },
     {
       "code": "DUPA",
-      "command": "figlet dupa && mpv https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      "command": "figlet dupa && mpv https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "desc": "Dupa"
     },
     {
       "code": "help",
-      "command": "bash -c 'xdg-open https://github.com/Szmelc-INC/Cheats'"
+      "command": "bash -c 'xdg-open https://github.com/Szmelc-INC/Cheats'",
+      "desc": "Display manual & list of cheats"
     },
     {
       "code": "HACKPACK",
-      "command": "bash -c 'nohup mpv --no-video https://www.youtube.com/watch?v=pFS4zYWxzNA > /dev/null 2>&1 &' && sudo apt install -y metasploit-framework nikto nmap aircrack-ng hydra john sqlmap gobuster wireshark dnsutils tcpdump openvpn dirb sslscan lynis && echo 'Type pkill mpv to stop the music'"
+      "command": "bash -c 'nohup mpv --no-video https://www.youtube.com/watch?v=pFS4zYWxzNA > /dev/null 2>&1 &' && sudo apt install -y metasploit-framework nikto nmap aircrack-ng hydra john sqlmap gobuster wireshark dnsutils tcpdump openvpn dirb sslscan lynis && echo 'Type pkill mpv to stop the music'",
+      "desc": "Install some hacking essentials"
     },
     {
       "code": "FIX1",
-      "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/1.sh -o /tmp/fix_script.sh && chmod +x /tmp/fix_script.sh && ./tmp/fix_script.sh && rm /tmp/fix_script.sh"
+      "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/1.sh -o /tmp/fix_script.sh && chmod +x /tmp/fix_script.sh && ./tmp/fix_script.sh && rm /tmp/fix_script.sh",
+      "desc": "Entropy v7 bug fix 1"
     },
     {
       "code": "FIX2",
-      "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/2.sh -o /tmp/fix_script.sh && chmod +x /tmp/fix_script.sh && ./tmp/fix_script.sh && rm /tmp/fix_script.sh"
+      "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/2.sh -o /tmp/fix_script.sh && chmod +x /tmp/fix_script.sh && ./tmp/fix_script.sh && rm /tmp/fix_script.sh",
+      "desc": "Entropy v7 bug fix 2"
     },
     {
       "code": "diskformat",
       "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/refs/heads/main/cheats/diskformat.sh -o /tmp/diskformat.sh && chmod +x /tmp/diskformat.sh && sudo ./tmp/diskformat.sh && rm /tmp/diskformat.sh"
+      "desc": "A simple script to format & partition drive for Entropy Linux"
     }
   ]
 }
