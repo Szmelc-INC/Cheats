@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# This is "cheat codes console" 
-# A handy script manager in the form of an easter-egg
-# Enter "cheats" to get addons, run fixes, find easter-eggs and more!
-# Full list of commands + payloads can be found at CHEATCODES_URL page below
+# "Cheat Codes Console v2"
+# A handy script manager in the form of an easter egg.
+# Enter "cheats" to get addons, run fixes, find easter eggs, and more!
+# Full list of commands + payloads can be found at the CHEATCODES_URL page below.
+# NOW WITH "desc" PARAMETER FOR CHEAT DESCRIPTION!
 
 # Request sudo password upfront
 echo "Requesting sudo password..."
@@ -34,7 +35,6 @@ if [ -z "$json_data" ]; then
 fi
 
 while true; do
-
   # Prompt the user to enter a cheat code
   cheatcode=$(dialog --title "Cheat Console v1" --inputbox "Enter cheats (or 'exit' to quit):" 8 50 3>&1 1>&2 2>&3 3>&-)
 
@@ -49,16 +49,22 @@ while true; do
     break
   fi
 
-  # Find the command corresponding to the cheat code
+  # Find the command and description corresponding to the cheat code
   command=$(echo "$json_data" | jq -r --arg code "$cheatcode" '.cheatcodes[] | select(.code==$code) | .command')
+  description=$(echo "$json_data" | jq -r --arg code "$cheatcode" '.cheatcodes[] | select(.code==$code) | .desc')
 
   if [ -z "$command" ] || [ "$command" == "null" ]; then
     dialog --title "Cheat Console" --msgbox "Code not found." 6 40
     continue
   fi
 
+  # Display the description if available
+  if [ -n "$description" ] && [ "$description" != "null" ]; then
+    dialog --title "Cheat Details" --msgbox "Description: \n$description" 10 60
+  fi
+
   # Show confirmation dialog
-  dialog --title "Confirmation" --yesno "Execute?: \n\n$command" 10 60
+  dialog --title "Confirmation" --yesno "Execute the following command? \n\n$command" 10 60
 
   response=$?
   case $response in
@@ -70,7 +76,6 @@ while true; do
         dialog --title "Cheat Console" --msgbox "Command execution cancelled." 6 40
         ;;
   esac
-
 done
 
 # Clean up
