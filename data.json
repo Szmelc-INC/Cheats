@@ -32,7 +32,7 @@
     },
     {
       "code": "diskformat",
-      "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/refs/heads/main/cheats/diskformat.sh -o /tmp/diskformat.sh && chmod +x /tmp/diskformat.sh && sudo ./tmp/diskformat.sh && rm /tmp/diskformat.sh"
+      "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/refs/heads/main/cheats/diskformat.sh -o /tmp/diskformat.sh && chmod +x /tmp/diskformat.sh && sudo ./tmp/diskformat.sh && rm /tmp/diskformat.sh",
       "desc": "A simple script to format & partition drive for Entropy Linux"
     }
   ]
