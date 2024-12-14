@@ -1,0 +1,9 @@
+{
+  "cheatcodes": [
+    {
+      "code": "RUCHANIE",
+      "command": "printf RUCHANIE",
+      "desc": "Ruchanie?"
+    }
+  ]
+}
