@@ -1,42 +1,109 @@
 #!/bin/bash
 
-# "Cheat Codes Console v2"
+# "Cheat Codes Console"
 # A handy script manager in the form of an easter egg.
 # Enter "cheats" to get addons, run fixes, find easter eggs, and more!
 # Full list of commands + payloads can be found at the CHEATCODES_URL page below.
-# NOW WITH "desc" PARAMETER FOR CHEAT DESCRIPTION!
+# Use `cheats -h` to see more!
 
-# Request sudo password upfront
+# Request sudo upfront
 echo "Requesting sudo password..."
 sudo -v
 
-# Check if dialog is installed
+# Check for deps
 if ! command -v dialog &> /dev/null; then
   echo "dialog is not installed. Installing..."
   sudo apt-get update
   sudo apt-get install -y dialog
 fi
 
-# Check if jq is installed
 if ! command -v jq &> /dev/null; then
   echo "jq is not installed. Installing..."
   sudo apt-get update
   sudo apt-get install -y jq
 fi
 
-# URL of the cheat codes JSON
-CHEATCODES_URL="https://raw.githubusercontent.com/Szmelc-INC/Cheats/refs/heads/main/data.json"  # Replace with the actual URL
+# Repos
+REPOSITORIES='{
+  "default": "https://raw.githubusercontent.com/Szmelc-INC/Cheats/refs/heads/main/data.json",
+  "repo2": "https://raw.githubusercontent.com/Szmelc-INC/Cheats/refs/heads/main/data-2.json"
+}'
 
-# Fetch the cheat codes JSON
-json_data=$(curl -s "$CHEATCODES_URL")
+# Initialize variables
+REPO_URL=$(echo "$REPOSITORIES" | jq -r '.default')
+LIST_ONLY=false
+
+# --help
+show_help() {
+  echo "Cheat Codes Console"
+  echo "Usage: cheats [OPTIONS]"
+  echo ""
+  echo "Options:"
+  echo "  -l, --list               List available cheat codes."
+  echo "  -d, --data <repo_name>   Specify a repository by name (e.g., 'repo2')."
+  echo "  -h, --help               Display this help message."
+  echo ""
+  echo "Available repositories:"
+  echo "$REPOSITORIES" | jq -r 'to_entries | .[] | "  \(.key): \(.value)"'
+  echo ""
+  exit 0
+}
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --list|-l)
+      LIST_ONLY=true
+      ;;
+    --data|-d)
+      REPO_NAME="$2"
+      shift
+      REPO_URL=$(echo "$REPOSITORIES" | jq -r --arg name "$REPO_NAME" '.[$name] // empty')
+      if [ -z "$REPO_URL" ]; then
+        echo "Unknown repository: $REPO_NAME"
+        echo "Use -h or --help to see available repositories."
+        exit 1
+      fi
+      ;;
+    --help|-h)
+      show_help
+      ;;
+    *)
+      echo "Unknown argument: $1"
+      echo "Use -h or --help for usage."
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+# Fetch JSON from selected repository
+json_data=$(curl -s "$REPO_URL")
 if [ -z "$json_data" ]; then
-  echo "Failed to fetch cheat codes data."
+  echo "Failed to fetch cheat codes data.json from $REPO_URL."
   exit 1
+fi
+
+# Function to display all available cheats in a dialog box
+list_cheats_dialog() {
+  cheats=$(echo "$json_data" | jq -r '.cheatcodes[] | "\(.code) - \(.desc)\n\(.command)"' | awk '
+    BEGIN { empty_line = "\n" }
+    NR % 2 == 1 { printf empty_line "# %s - %s\n", $1, substr($0, index($0,$2)) }
+    NR % 2 == 0 { printf "> %s\n", $0 empty_line }
+  ')
+  dialog --title "Available Cheats" --msgbox "$cheats" 20 60
+}
+
+# If --list or -l is passed, list cheats and exit
+if [ "$LIST_ONLY" = true ]; then
+  clear
+  list_cheats_dialog
+  exit 0
 fi
 
 while true; do
   # Prompt the user to enter a cheat code
-  cheatcode=$(dialog --title "Cheat Console v1" --inputbox "Enter cheats (or 'exit' to quit):" 8 50 3>&1 1>&2 2>&3 3>&-)
+  cheatcode=$(dialog --title "Cheat Console v3" --inputbox "Enter cheat \n(or type #list to show list:)" 8 50 3>&1 1>&2 2>&3 3>&-)
 
   # Check if user cancelled or pressed ESC
   exit_status=$?
@@ -44,9 +111,10 @@ while true; do
     break
   fi
 
-  # Check if user wants to exit
-  if [ "$cheatcode" == "exit" ] || [ "$cheatcode" == "quit" ]; then
-    break
+  # Handle the `#list` command
+  if [ "$cheatcode" == "#list" ]; then
+    list_cheats_dialog
+    continue
   fi
 
   # Find the command and description corresponding to the cheat code
@@ -60,11 +128,11 @@ while true; do
 
   # Display the description if available
   if [ -n "$description" ] && [ "$description" != "null" ]; then
-    dialog --title "Cheat Details" --msgbox "Description: \n$description" 10 60
+    dialog --title "Details" --msgbox "Description: \n$description" 10 60
   fi
 
   # Show confirmation dialog
-  dialog --title "Confirmation" --yesno "Execute the following command? \n\n$command" 10 60
+  dialog --title "Confirmation" --yesno "Execute? \n\n$command" 10 60
 
   response=$?
   case $response in
