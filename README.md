@@ -3,7 +3,11 @@
 > **Enter cheat codes to execute predefined commands** \
 > All commands can be found in `data.json` \
 *(Inspired by cheat codes in retro games)*
-
+> ### Upsides:
++ Each new cheat adds entire 0b of bloat to each system
++ Easy to update and manage remotely as json files on GitHub
++ Great way to add semi-official features to distro
++ Easy to remember aliases are good for accesibility
 ---
 
 ## Cheats now support multiple `data.json` files from any source you wish!
