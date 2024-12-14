@@ -39,6 +39,11 @@
       "code": "PENGUINS!",
       "command": "sudo apt install xpenguins -y && nohup xpenguins &",
       "desc": "PENGUINS!!!"
+    },
+        {
+      "code": "GAMING",
+      "command": "sudo apt install -y steam wine wine32 winetricks vulkan-tools libvulkan1 mesa-vulkan-drivers protontricks gamemode flatpak && sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && sudo flatpak update && flatpak install flathub com.usebottles.bottles && GPU=$(lspci | grep -i 'vga\|3d\|display') && echo '$GPU' && if echo '$GPU' | grep -qi 'nvidia'; then echo 'NVIDIA GPU detected' && sudo apt install -y nvidia-driver; elif echo '$GPU' | grep -qi 'amd'; then echo 'AMD GPU detected' && sudo apt install -y mesa-vulkan-drivers libgl1-mesa-dri; elif echo '$GPU' | grep -qi 'intel'; then echo 'Intel GPU detected' && sudo apt install -y mesa-vulkan-drivers libgl1-mesa-dri; else echo 'Unsupported GPU or drivers not found.'; fi",
+      "desc": "It's Gaming Time! - Install Steam, Bottles, Wine & Drivers!"
     }
   ]
 }
