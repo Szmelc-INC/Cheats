@@ -42,7 +42,7 @@
     },
     {
       "code": "MERGFIX1",
-      "command": "sudo bash -c 'echo "+ /etc/sudoers.d/entropy" >> /bin/mergstall.d/config/whitelist.conf' && sudo bash -c 'echo "- /bin/postinit.d/**" >> /bin/mergstall.d/config/blacklist.conf' && sudo bash -c 'echo "- /bin/postinit" >> /bin/mergstall.d/config/blacklist.conf'",
+      "command": "netrun-sh --sudo https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/mergstall9.sh",
       "desc": "Fix mergstall by adding more flags for v9!!!"
     }
   ]
