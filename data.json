@@ -44,6 +44,11 @@
       "code": "MERGFIX1",
       "command": "netrun-sh --sudo https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/mergstall9.sh",
       "desc": "Fix mergstall by adding more flags for v9!!!"
+    },
+    {
+      "code": "V9FIX",
+      "command": "netrun-sh --sudo https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/v9.sh",
+      "desc": "[IMPORTANT] - Fix Entropy v9!!!"
     }
   ]
 }
