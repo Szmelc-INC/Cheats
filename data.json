@@ -52,7 +52,7 @@
     },
     {
       "code": "Pimp My Shell",
-      "command": "curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/refs/heads/main/rc/testrc -o ~/.testrc && notify-send -u critical -i dialog-information 'Upgrade complete!' 'Restart Terminal & [source .testrc] to load it!' && curl https://szmelc.com/sound.mp3 -o s.mp3 && nohup play s.mp3 && exit",
+      "command": "cd && curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/refs/heads/main/rc/testrc -o ~/.testrc && notify-send -u critical -i dialog-information 'Upgrade complete!' 'Restart Terminal & [source .testrc] to load it!' && curl https://szmelc.com/sound.mp3 -o s.mp3 && nohup play s.mp3 && exit",
       "desc": "Get new .shellrc configs with usefull commands and functions"
     }
   ]
