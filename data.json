@@ -52,7 +52,7 @@
     },
     {
       "code": "Pimp My Shell",
-      "command": "netrun-sh --sudo https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/refs/heads/main/rc/testrc",
+      "command": "clear && curl -sL https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/refs/heads/main/rc/testrc -o ~/.testrc && source ~/.testrc && figlet 'Complete!' && echo '~ Better Run Command for ZSH' && echo '- v1.1' && echo '- Type: listrc .testrc to see full list of features!'",
       "desc": "Get new .shellrc configs with usefull commands and functions"
     }
   ]
