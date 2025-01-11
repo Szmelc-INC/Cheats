@@ -49,6 +49,11 @@
       "code": "V9FIX",
       "command": "netrun-sh --sudo https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/main/fixes/v9.sh",
       "desc": "[IMPORTANT] - Fix Entropy v9!!!"
+    },
+    {
+      "code": "Pimp My Shell",
+      "command": "netrun-sh --sudo https://raw.githubusercontent.com/Szmelc-INC/Entropy-Package-Manager/refs/heads/main/rc/testrc",
+      "desc": "Get new .shellrc configs with usefull commands and functions"
     }
   ]
 }
