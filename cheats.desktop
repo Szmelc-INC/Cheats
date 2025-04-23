@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Szmelc Cheats
+Comment="Cheats for Entropy Linux, a community driven, shell alias interpreter."
+Exec=cheats
+Icon=utilities-terminal
+Terminal=true
+Type=Application
+Categories=Development;Utility;Documentation;
